@@ -1,0 +1,1 @@
+# nem-library-ionic2-seed
