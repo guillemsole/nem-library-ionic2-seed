@@ -8,5 +8,18 @@
 </ion-header>
 
 <ion-content>
+  <ion-list *ngIf="transactions?.length != 0" no-lines>
+    <button ion-item
+            *ngFor="let transaction of transactions">
+      <p *ngIf="transaction.type == 257">Transfer transaction</p>
+      <p>Sender: {{transaction.signer.address.pretty()}}</p>
+      <p>Amount:   {{transaction.amount}} XEM</p>
+    </button>
+
+  </ion-list>
+  <button (click)="open($event)">
+    See more transactions
+  </button>
+
 
 </ion-content>

@@ -21,36 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {Component} from "@angular/core";
-import {AccountHttp, Address, ConfirmedTransactionListener, Transaction} from "nem-library";
-import {Pageable} from "nem-library/dist/src/infrastructure/Pageable";
+import {AccountHttp} from "nem-library";
 
-@Component({
-  selector: 'page-home',
-  templateUrl: './home.html'
-})
-export class HomePage {
-
-  allTransactions: Transaction[] = [];
-  allTransactionsPaginated: Pageable<Transaction[]>;
-
-  constructor(accountHttp: AccountHttp,
-    confirmedTransactionListener: ConfirmedTransactionListenerProvider
-  ) {
-
-    const address = new Address("TCJZJHAV63RE2JSKN27DFIHZRXIHAI736WXEOJGA");
-
-    this.allTransactionsPaginated = accountHttp.allTransactionsPaginated(address, undefined, 5);
-    this.allTransactionsPaginated.subscribe(transactions => {
-      this.allTransactions = this.allTransactions.concat(transactions);
-    });
-
-    confirmedTransactionListener.given(address).subscribe(transaction => {
-      this.allTransactions.shift(transaction);
-    })
-  }
-
-  open() {
-    this.allTransactions.nextPage();
-  }
+export function AccountHttpProvider(): AccountHttp {
+    return new AccountHttp({domain: "104.128.226.60"});
 }

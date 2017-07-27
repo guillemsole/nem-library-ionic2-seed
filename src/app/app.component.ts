@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 import {Component} from "@angular/core";
-import {LoadingController, Platform} from "ionic-angular";
 import {HomePage} from "../pages/home/home";
+import {NEMLibrary, NetworkTypes} from "nem-library";
 
 @Component({
   templateUrl: 'app.html'
@@ -33,6 +33,8 @@ export class MyApp {
 
   constructor() {
     this.rootPage = HomePage;
+    NEMLibrary.bootstrap(NetworkTypes.TEST_NET);
+
   }
 }
 
