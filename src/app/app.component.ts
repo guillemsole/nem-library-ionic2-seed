@@ -22,19 +22,35 @@
  * SOFTWARE.
  */
 import {Component} from "@angular/core";
-import {HomePage} from "../pages/home/home";
-import {NEMLibrary, NetworkTypes} from "nem-library";
+import {AccountHttp, Address, ConfirmedTransactionListener, Transaction, Pageable} from "nem-library";
+
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
-  rootPage: any;
+export class AppComponent {
 
-  constructor() {
-    this.rootPage = HomePage;
-    NEMLibrary.bootstrap(NetworkTypes.TEST_NET);
+  allTransactions: Transaction[] = [];
+  allTransactionsPaginated: Pageable<Transaction[]>;
 
+  constructor(accountHttp: AccountHttp,
+              confirmedTransactionListener: ConfirmedTransactionListener
+  ) {
+
+    const address = new Address("TCJZJHAV63RE2JSKN27DFIHZRXIHAI736WXEOJGA");
+
+    this.allTransactionsPaginated = accountHttp.allTransactionsPaginated(address, undefined, 5);
+    this.allTransactionsPaginated.subscribe(transactions => {
+      this.allTransactions = this.allTransactions.concat(transactions);
+    });
+
+    confirmedTransactionListener.given(address).subscribe(transaction => {
+      this.allTransactions.unshift(transaction);
+    })
+  }
+
+  open() {
+    this.allTransactionsPaginated.nextPage();
   }
 }
 

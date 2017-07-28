@@ -3,32 +3,31 @@ import {ErrorHandler, NgModule} from "@angular/core";
 import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
 import {SplashScreen} from "@ionic-native/splash-screen";
 import {StatusBar} from "@ionic-native/status-bar";
-import {MyApp} from "./app.component";
-import {HomePage} from "../pages/home/home";
+import {AppComponent} from "./app.component";
 import {AccountHttpProvider} from "../providers/AccountHttpProvider";
-import {AccountHttp} from "nem-library";
+import {AccountHttp, ConfirmedTransactionListener, NEMLibrary, NetworkTypes} from "nem-library";
 import {ConfirmedTransactionListenerProvider} from "../providers/ConfirmedTransactionListenerProvider";
+
+NEMLibrary.bootstrap(NetworkTypes.TEST_NET);
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(AppComponent)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    AppComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: AccountHttp, useFactory: AccountHttpProvider},
-    {provide: AccountHttp, useFactory: ConfirmedTransactionListenerProvider},
+    {provide: ConfirmedTransactionListener, useFactory: ConfirmedTransactionListenerProvider},
   ]
 })
 export class AppModule {}
