@@ -23,34 +23,50 @@
  */
 import {Component} from "@angular/core";
 import {AccountHttp, Address, ConfirmedTransactionListener, Transaction, Pageable} from "nem-library";
+import {Subscription} from "rxjs/Subscription";
+import { AlertController } from 'ionic-angular';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  // Listeners
+  confirmedTransactionsSubscription: Subscription;
 
   allTransactions: Transaction[] = [];
   allTransactionsPaginated: Pageable<Transaction[]>;
 
-  constructor(accountHttp: AccountHttp,
-              confirmedTransactionListener: ConfirmedTransactionListener
+  allTransactionsActive: boolean = false;
+
+  constructor(private accountHttp: AccountHttp,
+              private confirmedTransactionListener: ConfirmedTransactionListener
   ) {
 
-    const address = new Address("TCJZJHAV63RE2JSKN27DFIHZRXIHAI736WXEOJGA");
-
-    this.allTransactionsPaginated = accountHttp.allTransactionsPaginated(address, undefined, 5);
-    this.allTransactionsPaginated.subscribe(transactions => {
-      this.allTransactions = this.allTransactions.concat(transactions);
-    });
-
-    confirmedTransactionListener.given(address).subscribe(transaction => {
-      this.allTransactions.unshift(transaction);
-    })
   }
 
-  open() {
+  fetchMoreTransactions() {
     this.allTransactionsPaginated.nextPage();
+  }
+
+  startFetchingTransactions(address_raw: string) {
+    try {
+      let address = new Address(address_raw.trim());
+
+      this.allTransactionsPaginated = this.accountHttp.allTransactionsPaginated(address, undefined, 5);
+
+      this.allTransactionsPaginated.subscribe(transactions => {
+        this.allTransactions = this.allTransactions.concat(transactions);
+      });
+
+      if (this.confirmedTransactionsSubscription) this.confirmedTransactionsSubscription.unsubscribe();
+
+      this.confirmedTransactionsSubscription = this.confirmedTransactionListener.given(address).subscribe(transaction => {
+        this.allTransactions.unshift(transaction);
+      });
+    } catch (e) {
+      alert("malformed address");
+    }
   }
 }
 

@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <img alt="logo" height="16" src="assets/img/icon.png"/>
+            NEMLibrary Ionic 2 Seed
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list no-lines>
+        <ion-item>
+            <h1>Transactions List</h1>
+            <br/><h2>Fetch the account transaction list</h2>
+            <span style="color: darkred"><b>Just testnet</b></span>
+            <p>
+                Sample address:
+            </p>
+            <code>
+                TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-WKUCAH-5VIPOF-4W7K
+            </code>
+        </ion-item>
+        <ion-item>
+            <ion-input #address_transactions type="text" placeholder="Address"></ion-input>
+        </ion-item>
+        <button ion-button full (click)="startFetchingTransactions(address_transactions.value)">
+            Fetch
+        </button>
+    </ion-list>
+
+    <ion-list *ngIf="transactions?.length != 0" no-lines>
+        <button ion-item
+                *ngFor="let transaction of allTransactions">
+            <p>{{transaction | transactionType}}</p>
+            Signer: <span class="truncate"> {{transaction.signer.address.pretty()}} </span>
+            <br/> Timestamp: {{transaction.timeWindow.timeStamp.toString()}}
+        </button>
+
+    </ion-list>
+    <button ion-button full *ngIf="allTransactionsPaginated" (click)="fetchMoreTransactions()">
+        See more transactions
+    </button>
+</ion-content>

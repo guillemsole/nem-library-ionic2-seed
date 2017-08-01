@@ -7,12 +7,14 @@ import {AppComponent} from "./app.component";
 import {AccountHttpProvider} from "../providers/AccountHttpProvider";
 import {AccountHttp, ConfirmedTransactionListener, NEMLibrary, NetworkTypes} from "nem-library";
 import {ConfirmedTransactionListenerProvider} from "../providers/ConfirmedTransactionListenerProvider";
+import {TransactionTypePipe} from "../pipes/transaction.pipe";
 
 NEMLibrary.bootstrap(NetworkTypes.TEST_NET);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TransactionTypePipe
   ],
   imports: [
     BrowserModule,
