@@ -40,7 +40,7 @@ export class TransactionTypePipe implements PipeTransform {
             case TransactionTypes.PROVISION_NAMESPACE:
                 return "Namespace creation"
             case TransactionTypes.MULTISIG_AGGREGATE_MODIFICATION:
-                return "Create Multisig account"
+                return "Create multisig account"
             case TransactionTypes.MULTISIG:
                 if ((<MultisigTransaction>transaction).otherTransaction.type == TransactionTypes.MULTISIG_AGGREGATE_MODIFICATION) {
                     return "Edit multisig account"

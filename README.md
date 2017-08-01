@@ -1,4 +1,6 @@
-# nem-library-ionic2-seed
+# NEM Library Ionic 2 seed
+
+This is the official repository for NEM Library Ionic 2 seed.
 
 ## Components used
 
@@ -17,7 +19,7 @@ Run `ionic generate component component-name` to generate a new component. You c
 ## iOS & Android
 
 Run `ionic platform add ios|android` to create a project on each platform.
-Run `ionic build ios|android/` to build platform generating an apk on android and ipa on ios.
+Run `ionic build ios|android` to build platform generating an apk on android and ipa on ios.
 
 ## Further help
 
