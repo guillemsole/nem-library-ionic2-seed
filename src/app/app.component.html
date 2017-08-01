@@ -2,7 +2,7 @@
     <ion-navbar>
         <ion-title>
             <img alt="logo" height="16" src="assets/img/icon.png"/>
-            NEMLibrary Ion2 Seed
+            NEM Ion2 Seed
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -12,7 +12,7 @@
     <ion-list no-lines>
         <ion-item>
             <h1>Transactions List</h1>
-            <br/><h2>Fetch the account transaction list (Testnet accounts only)<br/>Sample address:
+            <br/><h2>Fetch the account transaction list <br/>Testnet accounts only <br/>Sample address:
             <br/><code>TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-WKUCAH-5VIPOF-4W7K</code></h2>
 
         </ion-item>
@@ -20,7 +20,7 @@
             <ion-input #address_transactions type="text" placeholder="Address"></ion-input>
         </ion-item>
         <ion-item>
-            <button ion-button block (click)="startFetchingTransactions(address_transactions.value)">
+            <button ion-button block app-button (click)="startFetchingTransactions(address_transactions.value)">
                 Fetch
             </button>
         </ion-item>
@@ -36,7 +36,7 @@
 
     </ion-list>
     <ion-item *ngIf="allTransactionsPaginated">
-        <button ion-button block (click)="fetchMoreTransactions()">
+        <button ion-button block app-button (click)="fetchMoreTransactions()">
             See more transactions
         </button>
     </ion-item>
