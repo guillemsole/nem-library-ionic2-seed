@@ -40,7 +40,8 @@ export class AppComponent {
   allTransactionsActive: boolean = false;
 
   constructor(private accountHttp: AccountHttp,
-              private confirmedTransactionListener: ConfirmedTransactionListener
+              private confirmedTransactionListener: ConfirmedTransactionListener,
+              public alertCtrl: AlertController
   ) {
 
   }
@@ -65,7 +66,12 @@ export class AppComponent {
         this.allTransactions.unshift(transaction);
       });
     } catch (e) {
-      alert("malformed address");
+      let alert = this.alertCtrl.create({
+        title: 'Malformed address!',
+        subTitle: 'Address must be testnet network and format: TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-WKUCAH-5VIPOF-4W7K',
+        buttons: ['OK']
+      });
+      alert.present();
     }
   }
 }
