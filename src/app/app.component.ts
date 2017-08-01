@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import {Component} from "@angular/core";
-import {AccountHttp, Address, ConfirmedTransactionListener, Transaction, Pageable} from "nem-library";
+import {AccountHttp, Address, ConfirmedTransactionListener, Pageable, Transaction} from "nem-library";
 import {Subscription} from "rxjs/Subscription";
 import { AlertController } from 'ionic-angular';
 
@@ -58,21 +58,29 @@ export class AppComponent {
 
       this.allTransactionsPaginated.subscribe(transactions => {
         this.allTransactions = this.allTransactions.concat(transactions);
+      }, error => {
+          this.errorAlert(error.toString());
       });
 
       if (this.confirmedTransactionsSubscription) this.confirmedTransactionsSubscription.unsubscribe();
 
       this.confirmedTransactionsSubscription = this.confirmedTransactionListener.given(address).subscribe(transaction => {
         this.allTransactions.unshift(transaction);
+      }, error => {
+          this.errorAlert(error.toString());
       });
     } catch (e) {
+        this.errorAlert('Malformed address');
+    }
+  }
+
+  errorAlert(error) {
       let alert = this.alertCtrl.create({
-        title: 'Malformed address!',
-        subTitle: 'Address must be testnet network and in correct format',
-        buttons: ['OK']
+          title: 'Error fetching transactions',
+          subTitle: error,
+          buttons: ['OK']
       });
       alert.present();
-    }
   }
 }
 
