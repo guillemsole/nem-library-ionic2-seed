@@ -12,9 +12,8 @@
     <ion-list no-lines>
         <ion-item>
             <h1>Transactions List</h1>
-            <br/><h2>Fetch the account transaction list <br/>Testnet accounts only <br/>Sample address:
-            <br/><code>TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-WKUCAH-5VIPOF-4W7K</code></h2>
-
+            <br/><h4>Fetch the account transaction list <br/>Testnet accounts only <br/>Sample address:
+            <br/><code>TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-<br/>WKUCAH-5VIPOF-4W7K</code></h4>
         </ion-item>
         <ion-item>
             <ion-input #address_transactions type="text" placeholder="Address"></ion-input>
@@ -26,7 +25,7 @@
         </ion-item>
     </ion-list>
 
-    <ion-list *ngIf="transactions?.length != 0">
+    <ion-list *ngIf="allTransactions.length != 0">
         <button ion-item
                 *ngFor="let transaction of allTransactions">
             <p>{{transaction | transactionType}}</p>
@@ -35,7 +34,7 @@
         </button>
 
     </ion-list>
-    <ion-item *ngIf="allTransactionsPaginated">
+    <ion-item *ngIf="allTransactions.length != 0">
         <button ion-button block app-button (click)="fetchMoreTransactions()">
             See more transactions
         </button>
