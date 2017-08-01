@@ -2,7 +2,7 @@
     <ion-navbar>
         <ion-title>
             <img alt="logo" height="16" src="assets/img/icon.png"/>
-            NEMLibrary Ionic 2 Seed
+            NEMLibrary Ion2 Seed
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -12,24 +12,21 @@
     <ion-list no-lines>
         <ion-item>
             <h1>Transactions List</h1>
-            <br/><h2>Fetch the account transaction list</h2>
-            <span style="color: darkred"><b>Just testnet</b></span>
-            <p>
-                Sample address:
-            </p>
-            <code>
-                TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-WKUCAH-5VIPOF-4W7K
-            </code>
+            <br/><h2>Fetch the account transaction list (Testnet accounts only)<br/>Sample address:
+            <br/><code>TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-WKUCAH-5VIPOF-4W7K</code></h2>
+
         </ion-item>
         <ion-item>
             <ion-input #address_transactions type="text" placeholder="Address"></ion-input>
         </ion-item>
-        <button ion-button full (click)="startFetchingTransactions(address_transactions.value)">
-            Fetch
-        </button>
+        <ion-item>
+            <button ion-button block (click)="startFetchingTransactions(address_transactions.value)">
+                Fetch
+            </button>
+        </ion-item>
     </ion-list>
 
-    <ion-list *ngIf="transactions?.length != 0" no-lines>
+    <ion-list *ngIf="transactions?.length != 0">
         <button ion-item
                 *ngFor="let transaction of allTransactions">
             <p>{{transaction | transactionType}}</p>
@@ -38,7 +35,9 @@
         </button>
 
     </ion-list>
-    <button ion-button full *ngIf="allTransactionsPaginated" (click)="fetchMoreTransactions()">
-        See more transactions
-    </button>
+    <ion-item *ngIf="allTransactionsPaginated">
+        <button ion-button block (click)="fetchMoreTransactions()">
+            See more transactions
+        </button>
+    </ion-item>
 </ion-content>

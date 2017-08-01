@@ -68,7 +68,7 @@ export class AppComponent {
     } catch (e) {
       let alert = this.alertCtrl.create({
         title: 'Malformed address!',
-        subTitle: 'Address must be testnet network and format: TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-WKUCAH-5VIPOF-4W7K',
+        subTitle: 'Address must be testnet network and in correct format',
         buttons: ['OK']
       });
       alert.present();
