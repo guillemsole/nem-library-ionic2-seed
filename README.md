@@ -1,32 +1,24 @@
-# NEMLibrary Ionic2 seed
+# nem-library-ionic2-seed
 
-This is the official NEMLibrary Ionic 2 seed
+## Components used
 
-### Setup the project
+- [NEMLibrary.com](https://nemlibrary.com):
+- [Ionic 2](https://ionicframework.com/):
 
-Fork the project
 
-```bash
-$ git clone git@git*__*hub.com:<YOUR_USERNAME>/nem-library-ionic2-seed.git
-cd nem-library-ionic2-seed
-```
-Install dependencies
+## Development server
 
-```bash
-$ npm install -g ionic cordova typescript @angular/cli
-$ npm install
-```
+Run `ionic serve` for a dev server. Navigate to `http://localhost:8100/`. The app will automatically reload if you change any of the source files.
 
-Run the project
+## Code scaffolding
 
-```bash
-$ ionic serve
-```
+Run `ionic generate component component-name` to generate a new component. You can also use `ionic generate component|directive|page|pipe|provider|tabs`.
 
-## License
+## iOS & Android
 
-[MIT Licence](https://github.com/guillemsole/nem-library-ionic2-seed/blob/master/LICENSE)
+Run `ionic platform add ios|android` to create a project on each platform.
+Run `ionic build ios|android/` to build platform generating an apk on android and ipa on ios.
 
-[pull-request]:https://help.github.com/articles/about-pull-requests/
+## Further help
 
-ionic cordova plugin rm cordova-plugin-console
+To get more help on the Ionic CLI use `ionic help` or go check out the [Ionic CLI README](https://github.com/ionic-team/ionic-cli/blob/master/README.md).
